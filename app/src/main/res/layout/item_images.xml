@@ -10,12 +10,9 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="6dp"
         android:background="#8c6666"
-        app:cardCornerRadius="7dp">
+        android:layout_margin="3dp"
+        app:cardCornerRadius="3dp">
 
         <ImageView
             android:id="@+id/iv_meizi"

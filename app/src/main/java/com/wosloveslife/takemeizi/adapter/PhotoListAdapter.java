@@ -46,7 +46,9 @@ public class PhotoListAdapter extends BaseRecyclerViewAdapter<BaiduPhotoData.Img
             public void onBind(final BaiduPhotoData.ImgsBean data, int position) {
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mCardView.getLayoutParams();
 
-                ImageViewUtils.autoFit(mCardView, mRootWidth - params.leftMargin - params.rightMargin,
+                ImageViewUtils.autoFit(mCardView, mRootWidth
+                                - params.leftMargin
+                                - params.rightMargin,
                         data.getThumbLargeWidth(), data.getThumbLargeHeight());
 
                 Glide.with(mView.getContext())

@@ -201,4 +201,15 @@ public abstract class BaseRefreshRecyclerView extends SwipeRefreshLayout {
     public void setOnSizeChangedListener(OnSizeChangeListener listener) {
         mOnSizeChangeListener = listener;
     }
+
+    public void setListPadding(int left, int top, int right, int bottom) {
+        mRecyclerView.setPadding(left, top, right, bottom);
+    }
+
+    public int getListWidth() {
+        return (mRecyclerView.getMeasuredWidth()
+                - mRecyclerView.getPaddingLeft()
+                - mRecyclerView.getPaddingRight())
+                / getSpanCount();
+    }
 }

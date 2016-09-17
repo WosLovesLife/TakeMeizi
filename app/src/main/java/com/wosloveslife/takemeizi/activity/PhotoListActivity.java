@@ -8,6 +8,7 @@ import com.wosloveslife.takemeizi.adapter.PhotoListAdapter;
 import com.wosloveslife.takemeizi.bean.BaiduPhotoData;
 import com.wosloveslife.takemeizi.interfaces.IDataUpdate;
 import com.wosloveslife.takemeizi.presenter.PhotoListActivityPresenter;
+import com.wosloveslife.takemeizi.utils.Dp2Px;
 import com.wosloveslife.takemeizi.view.BaseRefreshRecyclerView;
 import com.wosloveslife.takemeizi.view.StaggerGridRefreshRecyclerView;
 
@@ -46,14 +47,12 @@ public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<
 
     private void initView() {
         mPhotoListAdapter = new PhotoListAdapter();
-
+        final int padding = Dp2Px.toPX(this, 3);
+        mRecyclerView.setListPadding(padding, padding, padding, padding);
         mRecyclerView.setOnSizeChangedListener(new BaseRefreshRecyclerView.OnSizeChangeListener() {
             @Override
             public void onSizeChanged(int w, int h, int oldW, int oldH) {
-                mPhotoListAdapter.setRootWidth((mRecyclerView.getMeasuredWidth()
-                        - mRecyclerView.getPaddingRight()
-                        - mRecyclerView.getPaddingLeft())
-                        / mRecyclerView.getSpanCount());
+                mPhotoListAdapter.setRootWidth(mRecyclerView.getListWidth());
             }
         });
         mRecyclerView.setOnRefreshListener(new StaggerGridRefreshRecyclerView.OnRefreshListener() {
@@ -70,7 +69,6 @@ public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<
         mRecyclerView.setAdapter(mPhotoListAdapter);
         mRecyclerView.setLoadMoreEnable(true);
         mRecyclerView.startRefreshing();
-
         refreshData();
     }
 
