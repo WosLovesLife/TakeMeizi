@@ -48,7 +48,7 @@ public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<
     private void initView() {
         mPhotoListAdapter = new PhotoListAdapter();
         final int padding = Dp2Px.toPX(this, 3);
-        mRecyclerView.setListPadding(padding, padding, padding, padding);
+        mRecyclerView.setListPadding(padding, 0, padding, 0);
         mRecyclerView.setOnSizeChangedListener(new BaseRefreshRecyclerView.OnSizeChangeListener() {
             @Override
             public void onSizeChanged(int w, int h, int oldW, int oldH) {
