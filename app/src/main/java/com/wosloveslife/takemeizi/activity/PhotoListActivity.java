@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<BaiduPhotoData.ImgsBean> {
+public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<BaiduPhotoData> {
     @BindView(R.id.refresh_recycler_view)
     StaggerGridRefreshRecyclerView mRecyclerView;
 
@@ -73,22 +73,24 @@ public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<
     }
 
     public void refreshData() {
-        mPresenter.getImagesUrls();
+        mPresenter.getImageUrls(0,false);
     }
 
     public void getMoreData() {
-        mPresenter.getImagesUrls(mCurrentPosition);
+        mPresenter.getImageUrls(mCurrentPosition,true);
     }
 
     @Override
-    public void updateData(List<BaiduPhotoData.ImgsBean> data, boolean appended) {
+    public void onUpdateData(BaiduPhotoData data, boolean appended) {
+        if (data==null)return;
+        List<BaiduPhotoData.ImgsBean> imgs = data.getImgs();
         if (appended) {
-            mPhotoListAdapter.addData(data);
-            if (data != null) {
-                mCurrentPosition += data.size();
+            mPhotoListAdapter.addData(imgs);
+            if (imgs != null) {
+                mCurrentPosition += imgs.size();
             }
         } else {
-            mPhotoListAdapter.setData(data);
+            mPhotoListAdapter.setData(imgs);
             mCurrentPosition = 0;
         }
 

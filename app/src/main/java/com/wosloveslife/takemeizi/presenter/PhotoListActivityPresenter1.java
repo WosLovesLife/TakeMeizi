@@ -3,34 +3,21 @@ package com.wosloveslife.takemeizi.presenter;
 import android.content.Context;
 
 import com.wosloveslife.takemeizi.bean.BaiduPhotoData;
-import com.wosloveslife.takemeizi.bean.MeizhiData;
 import com.wosloveslife.takemeizi.interfaces.IDataUpdate;
 import com.wosloveslife.takemeizi.net.ApiManager;
 
 import java.util.HashMap;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
- * Created by YesingBeijing on 2016/9/12.
+ * Created by YesingBeijing on 2016/9/19.
  */
-public class PhotoListActivityPresenter extends ListDataPresenter<BaiduPhotoData> {
-    private static final String TAG = "MainActivityPresenter";
-
+public class PhotoListActivityPresenter1 extends ListDataPresenter<BaiduPhotoData> {
     private int mPn;
 
-    public PhotoListActivityPresenter(Context context, IDataUpdate<BaiduPhotoData> iDataUpdate) {
+    public PhotoListActivityPresenter1(Context context, IDataUpdate<BaiduPhotoData> iDataUpdate) {
         super(context, iDataUpdate);
-    }
-
-    private Observable<MeizhiData> getGankMeiziApi(int page) {
-        return ApiManager.getInstance()
-                .getAPiMeizi()
-                .getMeizhiData(page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
