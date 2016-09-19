@@ -8,8 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.target.ImageViewTarget;
 import com.wosloveslife.takemeizi.R;
 import com.wosloveslife.takemeizi.baserecyclerviewadapter.adapter.BaseRecyclerViewAdapter;
 import com.wosloveslife.takemeizi.baserecyclerviewadapter.viewHolder.BaseRecyclerViewHolder;
@@ -44,21 +42,14 @@ public class PhotoListAdapter extends BaseRecyclerViewAdapter<BaiduPhotoData.Img
 
             @Override
             public void onBind(final BaiduPhotoData.ImgsBean data, int position) {
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mCardView.getLayoutParams();
-
                 ImageViewUtils.autoFit(mCardView, mRootWidth
-                                - params.leftMargin
-                                - params.rightMargin,
+                                - mRootView.getPaddingLeft()
+                                - mRootView.getPaddingRight(),
                         data.getThumbLargeWidth(), data.getThumbLargeHeight());
 
                 Glide.with(mView.getContext())
                         .load(data.getThumbLargeUrl())
-                        .into(new ImageViewTarget<GlideDrawable>(mIvMeizi) {
-                            @Override
-                            protected void setResource(GlideDrawable resource) {
-                                mIvMeizi.setImageDrawable(resource);
-                            }
-                        });
+                        .into(mIvMeizi);
             }
         };
     }

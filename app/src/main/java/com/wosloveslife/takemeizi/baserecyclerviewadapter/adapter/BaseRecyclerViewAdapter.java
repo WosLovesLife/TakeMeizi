@@ -4,7 +4,6 @@ import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -142,8 +141,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         }
     }
 
-    private static final String TAG = "BaseRecyclerViewAdapter";
-
     @Override
     public void onViewAttachedToWindow(BaseRecyclerViewHolder holder) {
         int position = holder.getLayoutPosition();
@@ -152,9 +149,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
             StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) params;
             if (isHeaderViewPos(position) || isFooterViewPos(position)) {
                 p.setFullSpan(true);
-            } else {
-                int spanIndex = p.getSpanIndex();
-                Log.w(TAG, "onViewAttachedToWindow: spanIndex = " + spanIndex);
             }
         }
     }
@@ -169,7 +163,6 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
     public void addData(List<T> data) {
         if (data != null) {
-            int size = mData.size();
             mData.addAll(data);
             notifyDataSetChanged();
         }

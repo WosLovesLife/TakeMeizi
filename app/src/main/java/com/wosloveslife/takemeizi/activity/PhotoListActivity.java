@@ -2,6 +2,7 @@ package com.wosloveslife.takemeizi.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewTreeObserver;
 
 import com.wosloveslife.takemeizi.R;
 import com.wosloveslife.takemeizi.adapter.PhotoListAdapter;
@@ -68,8 +69,16 @@ public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<
         });
         mRecyclerView.setAdapter(mPhotoListAdapter);
         mRecyclerView.setLoadMoreEnable(true);
-        mRecyclerView.startRefreshing();
-        refreshData();
+
+        /* 只有在SwipeRefreshLayout的onMeasure()方法执行后才能调用刷新方法 */
+        mRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mRecyclerView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                mRecyclerView.setRefreshing(true);
+                refreshData();
+            }
+        });
     }
 
     public void refreshData() {
