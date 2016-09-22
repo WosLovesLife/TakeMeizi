@@ -5,8 +5,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.wosloveslife.takemeizi.R;
-
 
 /**
  * Created by YesingBeijing on 2016/9/14.
@@ -58,10 +56,6 @@ public abstract class BaseRefreshRecyclerView extends SwipeRefreshLayout {
      * 初始化刷新控件
      */
     private void initRefreshLayout() {
-        setColorSchemeColors(
-                getResources().getColor(R.color.colorPrimary),
-                getResources().getColor(R.color.colorAccent));
-
         setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -81,7 +75,7 @@ public abstract class BaseRefreshRecyclerView extends SwipeRefreshLayout {
         mLayoutManager = initLayoutManager();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -162,6 +156,14 @@ public abstract class BaseRefreshRecyclerView extends SwipeRefreshLayout {
      */
     public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration, int index) {
         mRecyclerView.addItemDecoration(itemDecoration, index);
+    }
+
+    public void setItemAnimator(RecyclerView.ItemAnimator animator) {
+        mRecyclerView.setItemAnimator(animator);
+    }
+
+    public RecyclerView getRecyclerView(){
+        return mRecyclerView;
     }
 
     //=======================================================

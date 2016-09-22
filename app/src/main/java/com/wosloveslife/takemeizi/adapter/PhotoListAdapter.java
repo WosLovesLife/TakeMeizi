@@ -1,6 +1,7 @@
 package com.wosloveslife.takemeizi.adapter;
 
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class PhotoListAdapter extends BaseRecyclerViewAdapter<BaiduPhotoData.Img
 
     @Override
     protected BaseRecyclerViewHolder<BaiduPhotoData.ImgsBean> onCreateItemViewHolder(ViewGroup parent) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_images, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_images, parent, false);
 
         return new BaseRecyclerViewHolder<BaiduPhotoData.ImgsBean>(view) {
 
@@ -44,11 +45,9 @@ public class PhotoListAdapter extends BaseRecyclerViewAdapter<BaiduPhotoData.Img
 
             @Override
             public void onBind(final BaiduPhotoData.ImgsBean data, int position) {
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mCardView.getLayoutParams();
+                StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) mRootView.getLayoutParams();
 
-                ImageViewUtils.autoFit(mCardView, mRootWidth
-                                - params.leftMargin
-                                - params.rightMargin,
+                ImageViewUtils.autoFit(mCardView, mRootWidth - params.leftMargin - params.rightMargin,
                         data.getThumbLargeWidth(), data.getThumbLargeHeight());
 
                 Glide.with(mView.getContext())
