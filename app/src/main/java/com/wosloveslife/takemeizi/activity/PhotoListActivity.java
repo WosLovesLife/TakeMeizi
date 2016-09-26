@@ -91,7 +91,7 @@ public class PhotoListActivity extends AppCompatActivity implements IDataUpdate<
 
     @Override
     public void onUpdateData(BaiduPhotoData data, boolean appended) {
-        if (data==null)return;
+        if (data == null) return;
         List<BaiduPhotoData.ImgsBean> imgs = data.getImgs();
         if (appended) {
             mPhotoListAdapter.addData(imgs);
